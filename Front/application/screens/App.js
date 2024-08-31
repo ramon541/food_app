@@ -1,14 +1,19 @@
 import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { useBearStore } from "../store";
+import { useStore } from "../store";
 import InitialRoutes from "../routes/initial.routes";
+import AuthRoutes from "../routes/auth.routes";
 
 export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaView style={{ flex: 1 }}>
-        {useBearStore((state) => state.isSignedIn) ? null : <InitialRoutes />}
+        {useStore((state) => state.isSignedIn) ? (
+          <AuthRoutes />
+        ) : (
+          <InitialRoutes />
+        )}
       </SafeAreaView>
     </NavigationContainer>
   );

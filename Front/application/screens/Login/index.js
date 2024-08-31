@@ -9,12 +9,19 @@ import {
 
 import { colors } from "../../styles";
 import { ActionButton, TextInput } from "../../components";
+import { useStore } from "../../store";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const passwordRef = useRef();
+
+  //================================================================
+  const handleLogin = () => {
+    console.log("Email: %s, Password: %s", email, password);
+    useStore.setState({ isSignedIn: true });
+  };
 
   //================================================================
   const renderTopSection = () => {
@@ -44,7 +51,6 @@ export default function Login({ navigation }) {
         />
         <TextInput
           ref={passwordRef}
-          style={{ marginTop: 16 }}
           label="Senha"
           placeholder="* * * * * * * * * * *"
           isSecure
@@ -54,10 +60,10 @@ export default function Login({ navigation }) {
         <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
           <Text style={styles.forgotPassword}>Esqueci minha senha</Text>
         </TouchableOpacity>
-        <ActionButton title="Logar" />
+        <ActionButton title="Logar" handleClick={handleLogin} />
         <View style={styles.signUpContainer}>
           <Text style={{ fontSize: 16, color: colors.gray }}>
-            Não tem uma conta?
+            Não tem conta?
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text
