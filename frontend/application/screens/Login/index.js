@@ -76,6 +76,7 @@ export default function Login({ navigation }) {
           isSecure
           setValue={setPassword}
           value={password}
+          onSubmit={handleLogin}
         />
         <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
           <Text style={styles.forgotPassword}>Esqueci minha senha</Text>

@@ -22,6 +22,7 @@ const login = async (request, response) => {
 //================================================================
 const cadastrar = async (request, response) => {
   console.log("CHAMOU A ROTA: /cadastrar");
+  console.log("req.body:", request.body);
   if (
     request.body.Fname === undefined ||
     request.body.Lname === undefined ||
@@ -38,7 +39,9 @@ const cadastrar = async (request, response) => {
   const IDuser = await userModel.cadastrar(request.body);
 
   if (!IDuser) {
-    return response.status(400).json({ message: "Email already in use" });
+    return response
+      .status(400)
+      .json({ message: "Email already in use", code: 1 });
   }
 
   console.log("RES:", IDuser);
