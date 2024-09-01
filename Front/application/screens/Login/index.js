@@ -67,7 +67,7 @@ export default function Login({ navigation }) {
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text
-              style={{ fontSize: 16, fontWeight: "bold", color: colors.green }}
+              style={{ fontSize: 16, fontWeight: "bold", color: colors.orange }}
             >
               Cadastre-se
             </Text>
@@ -80,7 +80,7 @@ export default function Login({ navigation }) {
   //================================================================
   return (
     <View style={styles.container}>
-      <StatusBar style="light" backgroundColor={colors.darkGreen} />
+      <StatusBar barStyle="light-content" backgroundColor={colors.orange} />
       {renderTopSection()}
       {renderBottomSection()}
     </View>
@@ -91,7 +91,7 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: colors.darkGreen,
+    backgroundColor: colors.orange,
   },
   bgTop: {
     height: "30%",
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   forgotPassword: {
-    color: colors.green,
+    color: colors.orange,
     textAlign: "center",
   },
   signUpContainer: {

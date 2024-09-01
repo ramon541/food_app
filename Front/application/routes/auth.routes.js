@@ -24,13 +24,13 @@ export default function AuthRoutes() {
             <MaterialIcons
               name="home"
               size={size}
-              color={focused ? colors.green : colors.gray}
+              color={focused ? colors.orange : colors.gray}
             />
           ),
           tabBarLabel: ({ color, size, focused }) => (
             <Text
               style={{
-                color: focused ? colors.green : colors.gray,
+                color: focused ? colors.orange : colors.gray,
                 fontSize: 12,
                 fontWeight: focused ? "bold" : "normal",
               }}
@@ -48,13 +48,13 @@ export default function AuthRoutes() {
             <MaterialIcons
               name="person"
               size={size}
-              color={focused ? colors.green : colors.gray}
+              color={focused ? colors.orange : colors.gray}
             />
           ),
           tabBarLabel: ({ color, size, focused }) => (
             <Text
               style={{
-                color: focused ? colors.green : colors.gray,
+                color: focused ? colors.orange : colors.gray,
                 fontSize: 12,
                 fontWeight: focused ? "bold" : "normal",
               }}

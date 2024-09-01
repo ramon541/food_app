@@ -7,4 +7,7 @@ import ActionButton from "./buttons/ActionButton";
 //--------- Headers ---------
 import CustomHeader from "./headers/CustomHeader";
 
-export { TextInput, ActionButton, CustomHeader };
+//--------- Cards ---------
+import Card from "./cards/RestaurantCard";
+
+export { TextInput, ActionButton, CustomHeader, Card };

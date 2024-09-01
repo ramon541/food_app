@@ -9,7 +9,7 @@ export default function ActionButton(props) {
       <View
         style={[
           styles.container,
-          { backgroundColor: isDisabled ? colors.lightGray : colors.green },
+          { backgroundColor: isDisabled ? colors.lightGray : colors.orange },
         ]}
       >
         <Text

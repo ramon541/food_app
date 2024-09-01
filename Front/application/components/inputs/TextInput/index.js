@@ -26,7 +26,7 @@ const TextInput = forwardRef((props, ref) => {
           ref={ref}
           style={[
             styles.container,
-            { borderColor: isFocused ? colors.green : colors.gray },
+            { borderColor: isFocused ? colors.orange : colors.gray },
             { borderWidth: isFocused ? 2 : 1 },
           ]}
           placeholder={placeholder}

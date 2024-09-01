@@ -11,7 +11,13 @@ export default function CustomHeader() {
         <MaterialIcons name="menu" size={28} style={styles.menuIcon} />
       </TouchableOpacity>
       <View>
-        <Text style={{ color: colors.darkGreen, textAlign: "left" }}>
+        <Text
+          style={{
+            color: colors.orange,
+            textAlign: "left",
+            fontWeight: "bold",
+          }}
+        >
           Enviando para
         </Text>
         <TouchableOpacity
@@ -40,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: colors.white,
     shadowColor: colors.black,
-    elevation: 10,
+    // elevation: 10,
     flexDirection: "row",
     alignItems: "center",
     gap: 16,
