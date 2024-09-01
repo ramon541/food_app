@@ -4,11 +4,15 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import { colors } from "../../styles";
 
-export default function CustomHeader() {
+export default function CustomHeader({ navigation, goBack }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <MaterialIcons name="menu" size={28} style={styles.menuIcon} />
+      <TouchableOpacity onPress={goBack ? navigation.goBack : null}>
+        <MaterialIcons
+          name={goBack ? "arrow-back" : "menu"}
+          size={28}
+          style={styles.menuIcon}
+        />
       </TouchableOpacity>
       <View>
         <Text

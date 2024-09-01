@@ -9,8 +9,14 @@ import RestaurantCard from "../../components/cards/RestaurantCard";
 import MOCK_IMG from "../../assets/MOCK_IMG.jpg";
 import mock_restaurants from "../../store/mocks/HOME RESTAURANTS";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [text, setText] = useState("");
+  //================================================================
+  const handleClickRestaurant = () => {
+    console.log("Clicou no restaurante");
+    navigation.navigate("Restaurant");
+  };
+
   //================================================================
   const renderItem = (item) => {
     const { id, name, category, stars, freight, deliveryTime } = item;
@@ -25,6 +31,7 @@ export default function Home() {
           stars={stars}
           freight={freight}
           deliveryTime={deliveryTime}
+          handleClick={handleClickRestaurant}
         />
       </View>
     );

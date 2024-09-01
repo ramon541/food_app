@@ -14,56 +14,74 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function AuthRoutes() {
+  const MainTabs = () => {
+    return (
+      <Tab.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <MaterialIcons
+                name="home"
+                size={size}
+                color={focused ? colors.orange : colors.gray}
+              />
+            ),
+            tabBarLabel: ({ color, size, focused }) => (
+              <Text
+                style={{
+                  color: focused ? colors.orange : colors.gray,
+                  fontSize: 12,
+                  fontWeight: focused ? "bold" : "normal",
+                }}
+              >
+                Início
+              </Text>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: ({ color, size, focused }) => (
+              <MaterialIcons
+                name="person"
+                size={size}
+                color={focused ? colors.orange : colors.gray}
+              />
+            ),
+            tabBarLabel: ({ color, size, focused }) => (
+              <Text
+                style={{
+                  color: focused ? colors.orange : colors.gray,
+                  fontSize: 12,
+                  fontWeight: focused ? "bold" : "normal",
+                }}
+              >
+                Meu perfil
+              </Text>
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  };
+
+  //================================================================
   return (
-    <Tab.Navigator screenOptions={{ header: () => <CustomHeader /> }}>
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <MaterialIcons
-              name="home"
-              size={size}
-              color={focused ? colors.orange : colors.gray}
-            />
-          ),
-          tabBarLabel: ({ color, size, focused }) => (
-            <Text
-              style={{
-                color: focused ? colors.orange : colors.gray,
-                fontSize: 12,
-                fontWeight: focused ? "bold" : "normal",
-              }}
-            >
-              Início
-            </Text>
-          ),
-        }}
+    <Stack.Navigator
+      screenOptions={({ navigation }) => ({
+        header: () => <CustomHeader navigation={navigation} goBack />,
+      })}
+    >
+      <Stack.Screen
+        name="MainTabs"
+        component={MainTabs}
+        options={{ headerShown: false }}
       />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <MaterialIcons
-              name="person"
-              size={size}
-              color={focused ? colors.orange : colors.gray}
-            />
-          ),
-          tabBarLabel: ({ color, size, focused }) => (
-            <Text
-              style={{
-                color: focused ? colors.orange : colors.gray,
-                fontSize: 12,
-                fontWeight: focused ? "bold" : "normal",
-              }}
-            >
-              Meu perfil
-            </Text>
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      <Stack.Screen name="Restaurant" component={Restaurant} />
+    </Stack.Navigator>
   );
 }

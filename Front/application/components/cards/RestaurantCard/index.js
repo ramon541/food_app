@@ -5,9 +5,18 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "../../../styles";
 
 export default function RestaurantCard(props) {
-  const { id, image, name, category, stars, freight, deliveryTime } = props;
+  const {
+    id,
+    image,
+    name,
+    category,
+    stars,
+    freight,
+    deliveryTime,
+    handleClick,
+  } = props;
   return (
-    <TouchableOpacity key={id} style={styles.container}>
+    <TouchableOpacity key={id} style={styles.container} onPress={handleClick}>
       <Image source={image} style={styles.img} resizeMode="cover" />
       <View style={{ gap: 4 }}>
         <Text style={styles.title}>{name}</Text>
