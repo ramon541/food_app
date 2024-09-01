@@ -5,11 +5,13 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 
 import { colors } from "../../styles";
 import { ActionButton, TextInput } from "../../components";
 import { useStore } from "../../store";
+import { login } from "../../services";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -18,9 +20,27 @@ export default function Login({ navigation }) {
   const passwordRef = useRef();
 
   //================================================================
-  const handleLogin = () => {
-    console.log("Email: %s, Password: %s", email, password);
-    useStore.setState({ isSignedIn: true });
+  const showToast = (msg) => {
+    ToastAndroid.showWithGravity(
+      `${msg}`,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
+  //================================================================
+  const handleLogin = async () => {
+    if (email.length === 0 || password.length === 0) {
+      showToast("Preencha todos os campos!");
+    } else {
+      const user = await login({ email, password });
+      if (user) {
+        useStore.setState({ isSignedIn: true });
+        useStore.setState({ user: user });
+      } else {
+        showToast("Email ou senha inválidos!");
+      }
+    }
   };
 
   //================================================================

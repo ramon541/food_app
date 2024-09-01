@@ -6,9 +6,7 @@ export const useStore = create(
   persist(
     (set, get) => ({
       isSignedIn: false,
-      setSignedIn: (value) => set({ isSignedIn: value }),
-      bears: 0,
-      addABear: () => set({ bears: get().bears + 1 }),
+      user: {},
     }),
     {
       name: "food-storage", // unique name

@@ -37,6 +37,7 @@ const TextInput = forwardRef((props, ref) => {
           onSubmitEditing={onSubmit}
           returnKeyType={returnKeyType ? returnKeyType : "done"}
           secureTextEntry={isSecure ? true && !showPassword : false}
+          autoCapitalize="none"
         />
         {isSecure && (
           <MaterialIcons
