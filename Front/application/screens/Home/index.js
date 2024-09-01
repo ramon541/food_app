@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 import { colors } from "../../styles";
@@ -44,27 +44,29 @@ export default function Home() {
 
   //================================================================
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
-      <View style={styles.containerGreeting}>
-        <Text>Olá Ramon,</Text>
-        <Text style={styles.textGreeting}>{getGreeting()}</Text>
+      <View style={styles.container}>
+        <View style={styles.containerGreeting}>
+          <Text>Olá Ramon,</Text>
+          <Text style={styles.textGreeting}>{getGreeting()}</Text>
+        </View>
+        <InputIcon
+          placeholder="Procure por restaurantes ou categorias..."
+          icon="search"
+          value={text}
+          setValue={setText}
+          onSubmit={() => console.log("Procurando... %s", text)}
+        />
+        <Text style={styles.title}>Restaurantes abertos</Text>
+        <FlashList
+          data={mock_restaurants}
+          keyExtractor={(item) => item.id}
+          estimatedItemSize={230}
+          renderItem={({ item }) => renderItem(item)}
+        />
       </View>
-      <InputIcon
-        placeholder="Procure por restaurantes ou categorias..."
-        icon="search"
-        value={text}
-        setValue={setText}
-        onSubmit={() => console.log("Procurando... %s", text)}
-      />
-      <Text style={styles.title}>Restaurantes abertos</Text>
-      <FlashList
-        data={mock_restaurants}
-        keyExtractor={(item) => item.id}
-        estimatedItemSize={230}
-        renderItem={({ item }) => renderItem(item)}
-      />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -73,7 +75,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     paddingHorizontal: 24,
-    paddingTop: 24,
     gap: 24,
   },
   containerGreeting: {
