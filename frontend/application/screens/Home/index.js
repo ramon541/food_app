@@ -5,11 +5,14 @@ import { FlashList } from "@shopify/flash-list";
 import { colors } from "../../styles";
 import InputIcon from "../../components/inputs/InputIcon";
 import RestaurantCard from "../../components/cards/RestaurantCard";
+import { useStore } from "../../store";
 
 import MOCK_IMG from "../../assets/MOCK_IMG.jpg";
 import mock_restaurants from "../../store/mocks/HOME RESTAURANTS";
 
 export default function Home({ navigation }) {
+  const user = useStore((state) => state.user);
+
   const [text, setText] = useState("");
   //================================================================
   const handleClickRestaurant = () => {
@@ -55,7 +58,7 @@ export default function Home({ navigation }) {
       <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
       <View style={styles.container}>
         <View style={styles.containerGreeting}>
-          <Text>Olá Ramon,</Text>
+          <Text>Olá {user.Fname},</Text>
           <Text style={styles.textGreeting}>{getGreeting()}</Text>
         </View>
         <InputIcon
