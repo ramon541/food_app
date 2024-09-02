@@ -17,7 +17,7 @@ export default function RestaurantCard(props) {
   } = props;
   return (
     <TouchableOpacity key={id} style={styles.container} onPress={handleClick}>
-      <Image source={image} style={styles.img} resizeMode="cover" />
+      <Image source={{ uri: image }} style={styles.img} resizeMode="cover" />
       <View style={{ gap: 4 }}>
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.category}>{category}</Text>

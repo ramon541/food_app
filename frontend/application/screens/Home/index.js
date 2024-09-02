@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
@@ -7,31 +7,60 @@ import InputIcon from "../../components/inputs/InputIcon";
 import RestaurantCard from "../../components/cards/RestaurantCard";
 import { useStore } from "../../store";
 
-import MOCK_IMG from "../../assets/MOCK_IMG.jpg";
-import mock_restaurants from "../../store/mocks/HOME RESTAURANTS";
+import { getRestaurants } from "../../services";
 
 export default function Home({ navigation }) {
   const user = useStore((state) => state.user);
 
   const [text, setText] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
+  //================================================================
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getRestaurants();
+      setRestaurants(response);
+      console.log(response);
+    }
+    fetchData();
+  }, []);
+
+  //================================================================
+  const handleSearch = () => {
+    return restaurants.filter((val) => {
+      if (text === "") return val;
+      else if (
+        val.nome.toLowerCase().includes(text.toLowerCase()) ||
+        val.categoria.toLowerCase().includes(text.toLowerCase())
+      )
+        return val;
+    });
+  };
+
   //================================================================
   const handleClickRestaurant = () => {
-    console.log("Clicou no restaurante");
     navigation.navigate("Restaurant");
   };
 
   //================================================================
   const renderItem = (item) => {
-    const { id, name, category, stars, freight, deliveryTime } = item;
+    const {
+      IDrestaurante,
+      imagem,
+      nome,
+      categoria,
+      stars,
+      freight,
+      deliveryTime,
+    } = item;
 
     return (
       <View style={{ marginBottom: 24 }}>
         <RestaurantCard
-          id={id}
-          image={MOCK_IMG}
-          name={name}
-          category={category}
-          stars={stars}
+          id={IDrestaurante}
+          image={imagem}
+          name={nome}
+          category={categoria}
+          stars={stars.toFixed(1)}
           freight={freight}
           deliveryTime={deliveryTime}
           handleClick={handleClickRestaurant}
@@ -70,8 +99,8 @@ export default function Home({ navigation }) {
         />
         <Text style={styles.title}>Restaurantes abertos</Text>
         <FlashList
-          data={mock_restaurants}
-          keyExtractor={(item) => item.id}
+          data={handleSearch()}
+          keyExtractor={(item) => item.IDrestaurante}
           estimatedItemSize={230}
           renderItem={({ item }) => renderItem(item)}
         />

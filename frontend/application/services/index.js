@@ -29,3 +29,13 @@ export const signUp = async ({ Fname, Lname, email, password }) => {
     console.error(error);
   }
 };
+
+//================================================================
+export const getRestaurants = async () => {
+  try {
+    const response = await axios.get(API_URL + "/restaurantes");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
