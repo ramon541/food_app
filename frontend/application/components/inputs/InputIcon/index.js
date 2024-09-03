@@ -10,7 +10,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "../../../styles";
 
 export default function InputIcon(props) {
-  const { placeholder, icon, value, setValue, onSubmit } = props;
+  const { placeholder, icon, value, setValue, onSubmit, clearText } = props;
 
   return (
     <View style={styles.inputWithIcon}>
@@ -22,8 +22,15 @@ export default function InputIcon(props) {
         onSubmitEditing={onSubmit}
         returnKeyType="search"
       />
-      <TouchableOpacity style={styles.icon} onPress={onSubmit}>
-        <MaterialIcons name={icon} size={24} color={colors.gray} />
+      <TouchableOpacity
+        style={styles.icon}
+        onPress={clearText ? () => setValue("") : null}
+      >
+        <MaterialIcons
+          name={clearText ? (value === "" ? icon : "close") : icon}
+          size={24}
+          color={colors.gray}
+        />
       </TouchableOpacity>
     </View>
   );

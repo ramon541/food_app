@@ -26,7 +26,6 @@ export default function Home({ navigation }) {
     async function fetchData() {
       const response = await getRestaurants();
       setRestaurants(response);
-      console.log(response);
     }
     fetchData();
   }, []);
@@ -105,6 +104,7 @@ export default function Home({ navigation }) {
           icon="search"
           value={text}
           setValue={setText}
+          clearText
         />
         <Text style={styles.title}>Restaurantes abertos</Text>
         <FlashList

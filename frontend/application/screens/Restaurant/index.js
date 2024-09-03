@@ -3,7 +3,6 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import RestaurantCard from "../../components/cards/RestaurantCard";
 import { useStore } from "../../store";
 import { colors } from "../../styles";
-import InputIcon from "../../components/inputs/InputIcon";
 import { getCardapio } from "../../services";
 import { CardapioCard } from "../../components";
 import { FlashList } from "@shopify/flash-list";
@@ -21,7 +20,6 @@ export default function Restaurant({ navigation }) {
     endereco,
   } = useStore((state) => state.restaurante);
 
-  const [text, setText] = useState("");
   const [cardapio, setCardapio] = useState(null);
 
   //================================================================
@@ -80,7 +78,7 @@ export default function Restaurant({ navigation }) {
           />
           {renderDescription()}
         </View>
-        <View>
+        <View style={{ marginBottom: 48 }}>
           {cardapio &&
             cardapio.map((value) => (
               <>
