@@ -39,3 +39,13 @@ export const getRestaurants = async () => {
     console.error(error);
   }
 };
+
+//================================================================
+export const getCardapio = async (id) => {
+  try {
+    const response = await axios.get(API_URL + `/restaurantes/cardapio/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

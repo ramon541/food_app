@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 import { colors } from "../../styles";
 import InputIcon from "../../components/inputs/InputIcon";
-import RestaurantCard from "../../components/cards/RestaurantCard";
+import { RestaurantCard } from "../../components";
 import { useStore } from "../../store";
 
 import { getRestaurants } from "../../services";
@@ -37,7 +44,8 @@ export default function Home({ navigation }) {
   };
 
   //================================================================
-  const handleClickRestaurant = () => {
+  const handleClickRestaurant = (item) => {
+    useStore.setState({ restaurante: item });
     navigation.navigate("Restaurant");
   };
 
@@ -54,7 +62,10 @@ export default function Home({ navigation }) {
     } = item;
 
     return (
-      <View style={{ marginBottom: 24 }}>
+      <TouchableOpacity
+        style={{ marginBottom: 24 }}
+        onPress={() => handleClickRestaurant(item)}
+      >
         <RestaurantCard
           id={IDrestaurante}
           image={imagem}
@@ -63,9 +74,8 @@ export default function Home({ navigation }) {
           stars={stars.toFixed(1)}
           freight={freight}
           deliveryTime={deliveryTime}
-          handleClick={handleClickRestaurant}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -95,7 +105,6 @@ export default function Home({ navigation }) {
           icon="search"
           value={text}
           setValue={setText}
-          onSubmit={() => console.log("Procurando... %s", text)}
         />
         <Text style={styles.title}>Restaurantes abertos</Text>
         <FlashList

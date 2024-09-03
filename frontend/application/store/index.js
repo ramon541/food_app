@@ -7,6 +7,7 @@ export const useStore = create(
     (set, get) => ({
       isSignedIn: false,
       user: {},
+      restaurante: {},
     }),
     {
       name: "food-storage", // unique name
