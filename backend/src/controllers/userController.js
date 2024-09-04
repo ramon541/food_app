@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const otpController = require("../controllers/otpController");
 
 //================================================================
 const login = async (request, response) => {
@@ -8,7 +9,6 @@ const login = async (request, response) => {
   }
 
   const user = await userModel.login(request.body);
-
   if (!user) {
     return response
       .status(400)
@@ -16,7 +16,16 @@ const login = async (request, response) => {
   }
 
   console.log("RES:", user);
-  return response.status(200).json(user);
+
+  const resultOtp = await otpController.getOtp(request);
+  if (!resultOtp) {
+    return response.status(200).json({ message: "OTP not found", code: 0 });
+  } else if (resultOtp.verified === 0) {
+    return response.status(200).json({ message: "OTP not verified", code: 1 });
+  } else if (resultOtp.verified === 1) {
+    user[0].otp = resultOtp.otp;
+    return response.status(200).json(user);
+  }
 };
 
 //================================================================
