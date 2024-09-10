@@ -8,6 +8,7 @@ export const useStore = create(
       isSignedIn: false,
       user: {},
       restaurante: {},
+      userOtp: {},
     }),
     {
       name: "food-storage", // unique name

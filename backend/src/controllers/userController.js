@@ -24,6 +24,8 @@ const login = async (request, response) => {
     return response.status(200).json({ message: "OTP not verified", code: 1 });
   } else if (resultOtp.verified === 1) {
     user[0].otp = resultOtp.otp;
+    user[0].verified = 1;
+    user[0].user = await getUser(request);
     return response.status(200).json(user);
   }
 };
@@ -58,9 +60,21 @@ const cadastrar = async (request, response) => {
 };
 
 //================================================================
+const getUser = async (request, response) => {
+  const { IDpessoa, email } = request.body;
+
+  if (!IDpessoa && !email)
+    return response.status(400).json({ message: "Invalid data" });
+
+  const user = await userModel.getUser(request.body);
+
+  return user;
+};
+//================================================================
 
 //------------- Exports -------------
 module.exports = {
   login,
   cadastrar,
+  getUser,
 };

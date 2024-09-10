@@ -1,4 +1,5 @@
 const otpModel = require("../models/otpModel");
+const userModel = require("../models/userModel");
 
 //================================================================
 const sendOtp = async (request, response) => {
@@ -37,7 +38,8 @@ const verifyOtp = async (request, response) => {
   if (!otp) {
     return response.status(200).json({ message: "Invalid OTP", code: false });
   }
-
+  otp.code = true;
+  otp.user = await userModel.getUser(request.body);
   return response.status(200).json(otp);
 };
 

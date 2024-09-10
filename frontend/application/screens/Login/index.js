@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 import { colors } from "../../styles";
-import { ActionButton, TextInput } from "../../components";
+import { ActionButton, InitialComponent, TextInput } from "../../components";
 import { useStore } from "../../store";
 import { login } from "../../services";
 
@@ -34,11 +34,17 @@ export default function Login({ navigation }) {
       showToast("Preencha todos os campos!");
     } else {
       const user = await login({ email, password });
-      if (user) {
-        useStore.setState({ isSignedIn: true });
-        useStore.setState({ user: user });
-      } else {
+      console.log(user);
+      if (!user) {
         showToast("Email ou senha inválidos!");
+      } else {
+        if (user?.code === 0 || user.code === 1) {
+          useStore.setState({ userOtp: { email, code: user.code } });
+          navigation.navigate("CodeVerification");
+        } else if (user.verified === 1) {
+          useStore.setState({ isSignedIn: true });
+          useStore.setState({ user: user });
+        }
       }
     }
   };
@@ -60,7 +66,7 @@ export default function Login({ navigation }) {
   //================================================================
   const renderBottomSection = () => {
     return (
-      <View style={styles.bgBottom}>
+      <>
         <TextInput
           label="Email"
           placeholder="exemplo@email.com"
@@ -94,17 +100,19 @@ export default function Login({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </>
     );
   };
 
   //================================================================
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.orange} />
-      {renderTopSection()}
+    <InitialComponent
+      header1="Login"
+      header2="Faça login com uma conta existente"
+      navigation={navigation}
+    >
       {renderBottomSection()}
-    </View>
+    </InitialComponent>
   );
 }
 

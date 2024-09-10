@@ -53,9 +53,21 @@ const cadastrar = async (user) => {
 };
 
 //================================================================
+const getUser = async ({ IDpessoa, email }) => {
+  const unique = IDpessoa ? `IDpessoa = ${IDpessoa}` : `email = '${email}'`;
+  const query = `
+    SELECT * FROM PESSOAS
+      WHERE ${unique};
+  `;
+  const user = await connection.execute(query);
+  return user[0][0];
+};
+
+//================================================================
 
 //------------- Exports -------------
 module.exports = {
   login,
   cadastrar,
+  getUser,
 };

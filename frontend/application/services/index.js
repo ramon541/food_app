@@ -9,7 +9,7 @@ export const login = async ({ email, password }) => {
       email,
       password,
     });
-    return response.data[0];
+    return response.data[0] || response.data;
   } catch (error) {
     console.error(error);
   }
@@ -44,6 +44,30 @@ export const getRestaurants = async () => {
 export const getCardapio = async (id) => {
   try {
     const response = await axios.get(API_URL + `/restaurantes/cardapio/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//================================================================
+export const sendOtp = async (email) => {
+  try {
+    const response = await axios.post(API_URL + "/enviar/otp", { email });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//================================================================
+export const verifyOtp = async ({ email, otp }) => {
+  try {
+    const response = await axios.post(API_URL + "/verificar/otp", {
+      email,
+      otp,
+    });
+    console.log("@@@@@@@@@ response axios:", response.data);
     return response.data;
   } catch (error) {
     console.error(error);

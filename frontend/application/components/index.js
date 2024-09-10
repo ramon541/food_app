@@ -11,4 +11,14 @@ import CustomHeader from "./headers/CustomHeader";
 import RestaurantCard from "./cards/RestaurantCard";
 import CardapioCard from "./cards/CardapioCard";
 
-export { TextInput, ActionButton, CustomHeader, RestaurantCard, CardapioCard };
+//--------- Others ---------
+import InitialComponent from "./others/InitialComponent";
+
+export {
+  TextInput,
+  ActionButton,
+  CustomHeader,
+  RestaurantCard,
+  CardapioCard,
+  InitialComponent,
+};
